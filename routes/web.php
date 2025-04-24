@@ -4,6 +4,7 @@ use App\Http\Controllers\BandsController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\GenresController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 # Routes for HomeController
@@ -33,3 +34,14 @@ Route::delete('/favorite-bands/{bandId}', [FavoritesController::class, 'removeFa
 Route::get('/add-genre', [GenresController::class, 'addGenresView'])->name('genres.add');
 
 Route::post('/create-genre', [GenresController::class, 'storeGenre'])->name('genres.store');
+
+# Routes for UserController
+Route::get('/registration', [UserController::class, 'addUserView'])->name('users.add');
+
+Route::get('/login', [UserController::class, 'loginView'])->name('users.access');
+
+Route::post('/create-user', [UserController::class, 'storeUser'])->name('users.store');
+
+Route::post('/logout', [UserController::class, 'logout'])->name('users.logout');
+
+Route::post('/login', [UserController::class, 'login'])->name('login.store');
