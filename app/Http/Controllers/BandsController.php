@@ -6,6 +6,7 @@ use App\Models\Genre;
 use App\Models\User;
 use App\Models\Bands;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class BandsController extends Controller
@@ -31,10 +32,11 @@ class BandsController extends Controller
 
         public function showBand($bandId) {
             $band = Bands::findOrFail($bandId);
+            $user = Auth::user();
 
             $genreName = $band->genre->name;
 
-            return view('bands.show_band', compact('band', 'genreName'));
+            return view('bands.show_band', compact('band', 'genreName', 'user'));
         }
 
 

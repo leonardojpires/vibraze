@@ -53,12 +53,56 @@
                   <textarea name="description" class="form-control" id="description" aria-describedby="description" required></textarea>
                 </div>
 
+                <div class="d-flex flex-wrap flex-row gap-3 w-100">
+                    <div class="mb-3 w-25">
+                        <label for="singer" class="form-label">Singer</label>
+                        <input type="text" name="singer" class="form-control" id="singer" aria-describedby="singer" required>
+                    </div>
+                    <div class="mb-3 w-25">
+                        <label for="backing_vocals" class="form-label">Backing Vocals</label>
+                        <input type="text" name="backing_vocals" class="form-control" id="backing_vocals" aria-describedby="backing_vocals" required>
+                    </div>
+                    <div class="mb-3 w-25">
+                        <label for="rythm_guitarist" class="form-label">Rythm Guitarist</label>
+                        <input type="text" name="rythm_guitarist" class="form-control" id="rythm_guitarist" aria-describedby="rythm_guitarist" required>
+                    </div>
+                    <div class="mb-3 w-25">
+                        <label for="lead_guitarist" class="form-label">Lead Guitarist</label>
+                        <input type="text" name="lead_guitarist" class="form-control" id="lead_guitarist" aria-describedby="lead_guitarist" required>
+                    </div>
+                    <div class="mb-3 w-25">
+                        <label for="bassist" class="form-label">Bassist</label>
+                        <input type="text" name="bassist" class="form-control" id="bassist" aria-describedby="bassist" required>
+                    </div>
+                    <div class="mb-3 w-25">
+                        <label for="drummer" class="form-label">Drummer</label>
+                        <input type="text" name="drummer" class="form-control" id="drummer" aria-describedby="drummer" required>
+                    </div>
+                    <div class="mb-3 w-25">
+                        <label for="percurssionist" class="form-label">Percussionist</label>
+                        <input type="text" name="percurssionist" class="form-control" id="percurssionist" aria-describedby="percurssionist" required>
+                    </div>
+                    <div class="mb-3 w-25">
+                        <label for="keyboardist" class="form-label">Keyboardist</label>
+                        <input type="text" name="keyboardist" class="form-control" id="keyboardist" aria-describedby="keyboardist" required>
+                    </div>
+                    <div class="mb-3 w-25">
+                        <label for="dj" class="form-label">DJ</label>
+                        <input type="text" name="dj" class="form-control" id="dj" aria-describedby="dj" required>
+                    </div>
+                </div>
+
+                <div class="mb-3 w-50">
+                    <label for="best_selled_album" class="form-label">Best-Selled Album</label>
+                    <input type="text" name="best_selled_album" class="form-control" id="best_selled_album" aria-describedby="best_selled_album" required>
+                </div>
+
                 <div class="mb-3">
                     <label for="image_url" class="form-label">Image URL</label>
                     <input type="text" name="image_url" class="form-control" id="image_url">
                 </div>
 
-                <button type="submit" class="btn btn-success">Submit</button>
+                <button type="submit" class="btn btn-success mb-5">Submit</button>
 
             </form>
 
