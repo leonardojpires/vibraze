@@ -43,7 +43,7 @@
 
                         <div class="d-flex justify-content-between">
                             <button type="submit" class="btn btn-success w-48">Register</button>
-                            <a href="{{ route('users.access') }}" class="btn btn-outline-success w-48 text-decoration-none text-center">Already have an account?</a>
+                            <a href="{{ route('login') }}" class="btn btn-outline-success w-48 text-decoration-none text-center">Already have an account?</a>
                         </div>
                     </form>
                 </div>

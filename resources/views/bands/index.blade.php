@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div>
+<section>
 
     <div class="w-50">
         @if (session('error'))
@@ -16,7 +16,10 @@
         @endif
     </div>
 
-    <h1 class="mb-3">Find Your Favorite Bands</h1>
+    <div class="d-flex flex-column gap-3">
+        <h1>Welcome back, <span class="text-decoration-underline text-success">{{ $user->name }}</span></h1>
+        <h2 class="text-secondary mb-3 fs-3">Find Your Favorite Bands</h2>
+    </div>
 
     <div class="mb-3 search-input d-flex">
         <form action="{{ route('bands.list') }}" method="GET" class="d-flex w-100">
@@ -89,7 +92,20 @@
                                 <input type="submit" value="&#x2665;&#xfe0f;" class="favorite-button rounded-circle">
                             </form>
                         @endif
-                        <a href="{{ route('bands.show', $band->id) }}" class="btn btn-primary">View</a>
+                        <a href="{{ route('bands.show', $band->id) }}" class="btn btn-success">Infos</a>
+
+                        @if (auth()->check() && $user->role === 'admin')
+
+                            <form method="POST" action="{{ route('bands.remove', $band->id) }}">
+                                @csrf
+                                @method('DELETE')
+
+                                <input type="hidden" name="band_id" value="{{ $band->id }}">
+                                <button type="submit" class="btn btn-danger">Remove</button>
+                            </form>
+
+                        @endif
+
                     </div>
 
                     </div>
@@ -106,7 +122,7 @@
     <div class="d-flex justify-content-center mt-4">
         {{ $bands->appends(request()->except('page'))->links() }}
     </div>
-</div>
+</section>
 
 <script src="{{ asset('js/darkmode.js') }}"></script>
 

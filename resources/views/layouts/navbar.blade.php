@@ -17,12 +17,14 @@
             <li class="nav-item">
                 <a class="nav-link text-white underline-hover" href="{{ route('favorites.list') }}">Favorites</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-white underline-hover" href="{{ route('bands.add') }}">Add Bands</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white underline-hover" href="{{ route('genres.add') }}">Add Genres</a>
-            </li>
+            @if (Auth::user() && Auth::user()->role == 'admin')
+                <li class="nav-item">
+                    <a class="nav-link text-white underline-hover" href="{{ route('bands.add') }}">Add Bands</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white underline-hover" href="{{ route('genres.add') }}">Add Genres</a>
+                </li>
+            @endif
         </ul>
 
 
@@ -34,7 +36,7 @@
                         <button class="btn btn-outline-danger" type="submit">Log Out</button>
                     </form>
                 @else
-                    <a href="{{ route('users.access') }}" class="btn btn-success me-2">
+                    <a href="{{ route('login') }}" class="btn btn-success me-2">
                         Log in
                     </a>
                     @if (Route::has('users.add'))
