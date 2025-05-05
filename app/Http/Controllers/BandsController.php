@@ -8,6 +8,7 @@ use App\Models\Bands;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class BandsController extends Controller
 {
@@ -49,7 +50,6 @@ class BandsController extends Controller
 
         public function storeBand(Request $request) {
             $request->validate([
-                'band_id' => 'required|exists:bands,id',
                 'name' => 'required|string|max:255',
                 'genre_id' => 'required|exists:genres,id',
                 'formation_year' => 'required|integer|min:1900|max:' . date('Y'),
@@ -64,8 +64,14 @@ class BandsController extends Controller
                 'keyboardist' => 'nullable|string|max:255',
                 'dj' => 'nullable|string|max:255',
                 'best_selled_album' => 'nullable|string|max:255',
-                'image_url' => 'required|string'
+                'image' => 'required|image'
             ]);
+
+            $image = null;
+
+            if ($request->hasFile('image')) {
+                $image = Storage::putFile('bandPhotos', $request->file('image'));
+            }
 
             Bands::insert([
                 'name' => $request->name,
@@ -82,7 +88,7 @@ class BandsController extends Controller
                 'keyboardist' => $request->keyboardist ?? null,
                 'dj' => $request->dj ?? null,
                 'best_selled_album' => $request->best_selled_album ?? null,
-                'image_url' => $request->image_url,
+                'image' => $image
             ]);
 
             return redirect()->back()->with('success', 'Band added successfully!');
@@ -104,8 +110,14 @@ class BandsController extends Controller
                 'keyboardist' => 'nullable|string|max:255',
                 'dj' => 'nullable|string|max:255',
                 'best_selled_album' => 'nullable|string|max:255',
-                'image_url' => 'required|string'
+                'image' => 'required|image'
             ]);
+
+            $image = null;
+
+            if ($request->hasFile('image')) {
+                $image = Storage::putFile('bandPhotos', $request->file('image'));
+            }
 
             Bands::where('id', $bandId)->update([
                 'name' => $request->name,
@@ -122,7 +134,7 @@ class BandsController extends Controller
                 'keyboardist' => $request->keyboardist ?? null,
                 'dj' => $request->dj ?? null,
                 'best_selled_album' => $request->best_selled_album ?? null,
-                'image_url' => $request->image_url,
+                'image' => $image
             ]);
 
             return redirect()->back()->with('success', "Band updated successfully!");

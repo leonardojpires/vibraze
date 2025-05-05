@@ -5,11 +5,6 @@
 <div>
     <div class="d-flex gap-3 align-items-center mb-4">
         <h1 class="mb-3">Favorited Bands</h1>
-        <button id="darkModeToggle" class="btn btn-outline-secondary ms-3">
-            <span id="darkModeIcon" class="material-icons">
-                light_mode
-            </span>
-        </button>
     </div>
 
 {{--     <div class="mb-5 search-input d-flex">

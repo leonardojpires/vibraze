@@ -15,16 +15,7 @@
             @endif
         </div>
 
-        <div class="">
-            <div class="d-flex gap-3 align-items-center">
-                <h1 class="mb-3">Add Genres</h1>
-                <button id="darkModeToggle" class="btn btn-outline-secondary ms-3">
-                    <span id="darkModeIcon" class="material-icons">
-                        light_mode
-                    </span>
-                </button>
-            </div>
-
+        <div>
             <form method="POST" action="{{ route('genres.store') }}" >
                 @csrf
 
@@ -37,9 +28,16 @@
 
             </form>
             <hr>
-            <div class="d-flex flex-row flex-wrap gap-3 mt-5">
+            <h2 class="text-secondary mt-2 mb-3">Genres List</h2>
+            <div class="d-flex flex-row flex-wrap gap-3">
                 @foreach ($genres as $genre)
-                    <span class="btn btn-outline-secondary">{{ $genre->name }}</span>
+                    <div class="btn btn-outline-secondary d-flex flex-row align-items-center justify-content-center">{{ $genre->name }}
+                        <form action="{{ route('genres.remove', $genre->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn">&#10060;</button>
+                        </form>
+                    </div>
                 @endforeach
             </div>
 

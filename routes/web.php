@@ -41,6 +41,7 @@ Route::get('/add-genre', [GenresController::class, 'addGenresView'])->name('genr
 
 Route::post('/create-genre', [GenresController::class, 'storeGenre'])->name('genres.store')->middleware(['auth', 'admin']);
 
+Route::delete('/delete-genre/{genreId}', [GenresController::class, 'deleteGenre'])->name('genres.remove')->middleware(['auth', 'admin']);
 
 # Routes for UserController
 Route::get('/registration', [UserController::class, 'addUserView'])->name('users.add');

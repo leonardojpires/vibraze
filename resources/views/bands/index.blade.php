@@ -32,37 +32,32 @@
             @endif
         </form>
 
-        <button id="darkModeToggle" class="btn btn-outline-secondary ms-3">
-            <span id="darkModeIcon" class="material-icons">
-                light_mode
-            </span>
-        </button>
-
     </div>
 
     @if ($genres->count() > 0)
         <div class="mb-5 w-100">
-            <form action="{{ route('bands.list') }}" method="GET" class="d-flex flex-row flex-wrap gap-3 w-75">
-                @foreach ($genres as $genre)
-
-                    <div>
-                        <input
-                            class="form-check-input d-none flex-wrap genres-check"
-                            type="checkbox"
-                            name="genres[]"
-                            value="{{ $genre->id }}"
-                            id="genre-{{ $genre->id }}" {{ in_array($genre->id, request()->get('genres', [])) ? 'checked' : '' }}
-                            onchange="this.form.submit()"
-                        >
-
-                        <label
-                            class="form-check-label btn btn-outline-success btn-sm {{ in_array($genre->id, request()->get('genres', [])) ? 'active' : '' }} "
-                            for="genre-{{ $genre->id }}">{{ $genre->name }}</label
-                        >
-
-                    </div>
-                @endforeach
-            </form>
+            <div class="genres-scroll-effect">
+                <div class="genres-container">
+                    <form action="{{ route('bands.list') }}" method="GET" class="d-flex flex-row flex-wrap gap-3 w-75">
+                        @foreach ($genres as $genre)
+                            <div class="genre-item">
+                                <input
+                                    class="form-check-input d-none flex-wrap genres-check"
+                                    type="checkbox"
+                                    name="genres[]"
+                                    value="{{ $genre->id }}"
+                                    id="genre-{{ $genre->id }}" {{ in_array($genre->id, request()->get('genres', [])) ? 'checked' : '' }}
+                                    onchange="this.form.submit()"
+                                >
+                                <label
+                                    class="form-check-label btn btn-outline-success btn-sm {{ in_array($genre->id, request()->get('genres', [])) ? 'active' : '' }} "
+                                    for="genre-{{ $genre->id }}">{{ $genre->name }}</label
+                                >
+                            </div>
+                        @endforeach
+                    </form>
+                </div>
+            </div>
         </div>
     @endif
 
@@ -72,7 +67,7 @@
 
                 <div class="card" style="width: 18rem;">
 
-                    <img src="{{ asset("images/$band->image_url.png") }}" class="card-img-top" alt="{{ $band->name }}">
+                    <img src="{{ $band->image ? asset('storage/' . $band->image) : asset('images/soad.png') }}" class="card-img-top" alt="{{ $band->name }}">
                     <div class="card-body">
 
                     <p class="card-text">{{ $band->name }}</p>
@@ -83,7 +78,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <input type="hidden" name="band_id" value="{{ $band->id }}">
-                                <input type="submit" value="&#8212;" class="favorite-button rounded-circle">
+                                <input type="submit" value="" class="favorite-button rounded-circle">
                             </form>
                         @else
                             <form method="POST" action="{{ route('favorites.add', $band->id) }}">

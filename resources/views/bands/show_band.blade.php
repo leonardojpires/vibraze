@@ -56,7 +56,7 @@
         {{-- ADMIN --}}
         @elseif (auth()->check() && $user->role == 'admin')
             <div class="container mb-3 darkmode-container">
-                <form method="POST" action="{{ route('bands.update', ['bandId' => $band->id]) }}"  class="w-50">
+                <form method="POST" action="{{ route('bands.update', ['bandId' => $band->id]) }}"  class="w-50" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -131,9 +131,9 @@
                         <input type="text" class="form-control" id="best_selled_album" name="best_selled_album" value="{{ $band->best_selled_album }}">
                     </div>
 
-                    <div class="mb-3 w-25">
-                        <label for="image_url" class="form-label">Image URL</label>
-                        <input type="text" class="form-control" id="image_url" name="image_url" value="{{ $band->image_url }}">
+                    <div class="input-group mb-3">
+                        <input type="file" name="image" accept="image/*" class="form-control" id="image">
+                        <label class="input-group-text" for="image_url">Upload</label>
                     </div>
 
                     <input type="submit" class="btn btn-success" value="Save">

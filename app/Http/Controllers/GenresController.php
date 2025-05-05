@@ -24,4 +24,16 @@ class GenresController extends Controller
 
         return redirect()->back()->with('success', 'Genre added successfully!');
     }
+
+    public function deleteGenre(Request $request, $genreId) {
+        $genre = Genre::find($genreId);
+
+        if ($genre->bands()->exists()) {
+            return redirect()->back()->with('error', 'Cannot delete genre with associated bands.');
+        }
+
+        $genre->delete();
+
+        return redirect()->back()->with('success', 'Genre deleted successfully!');
+    }
 }

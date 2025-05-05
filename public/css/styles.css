@@ -74,6 +74,43 @@ body {
     border-color: rgba(83, 249, 74, 0.1);
 }
 
+.genres-container {
+    width: 75%;
+    overflow-x: auto;
+    white-space: nowrap;
+    /* background-color: #121212; */
+    /* padding: 10px; */
+    margin-left: 21px;
+    padding-bottom: 0.8rem;
+    /* box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; */
+}
+
+.genres-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.genres-container::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+
+.genres-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.genres-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.genres-container form {
+    flex-wrap: nowrap !important;
+}
+
+.genres-container .genre-item {
+    display: inline-block;
+}
+
 .favorite-button {
     /* background-color: rgb(209, 209, 209); */
     /* border-radius: 50%; */
