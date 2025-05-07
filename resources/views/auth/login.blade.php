@@ -29,7 +29,13 @@
                         </div>
 
                         <div class="d-flex justify-content-between">
-                            <button type="submit" class="btn btn-success w-48">Log In</button>
+                            <div class="d-flex justify-content-between align-items-center gap-3">
+                                <button type="submit" class="btn btn-success w-48">Log In</button>
+                                <div>
+                                    <input type="checkbox" name="remember" id="remember" class="form-check-input">
+                                    <label for="remember" class="form-check-label">Keep me logged in</label>
+                                </div>
+                            </div>
                             <a href="{{ route('users.add') }}" class="btn btn-outline-success w-48 text-decoration-none text-center">Don't have an account?</a>
                         </div>
                     </form>

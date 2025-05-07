@@ -26,7 +26,7 @@
 
                 <div class="card" style="width: 18rem;">
 
-                    <img src="{{ asset("images/$band->image_url.png") }}" class="card-img-top" alt="{{ $band->name }}">
+                    <img src="{{ $band->image ? asset('storage/' . $band->image) : asset('images/soad.png') }}" class="card-img-top" alt="{{ $band->name }}">
                     <div class="card-body">
 
                     <p class="card-text">{{ $band->name }}</p>

@@ -78,7 +78,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <input type="hidden" name="band_id" value="{{ $band->id }}">
-                                <input type="submit" value="" class="favorite-button rounded-circle">
+                                <input type="submit" value="&#10060;" class="favorite-button rounded-circle">
                             </form>
                         @else
                             <form method="POST" action="{{ route('favorites.add', $band->id) }}">

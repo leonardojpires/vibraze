@@ -48,10 +48,16 @@ class UserController extends Controller
             'password' => 'required|string|min:8',
         ]);
 
+        $remember = $request->has('remember');
+
         if (Auth::attempt([
             'email' => $request->email,
             'password' => $request->password,
-        ])) {
+        ], $remember)) {
+
+            // Create a new session ID to prevent an invasor from reusing the old session ID (protects against session fixation attacks)
+            $request->session()->regenerate();
+
             return redirect()->route('home')->with('success', 'Logged in successfully!');
         }
 

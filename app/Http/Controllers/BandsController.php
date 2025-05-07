@@ -36,9 +36,11 @@ class BandsController extends Controller
             $user = Auth::user();
             $genres = Genre::all();
 
+            $imagePath = $band->image ? Storage::url($band->image) : null;
+
             $genreName = $band->genre->name;
 
-            return view('bands.show_band', compact('band', 'genreName', 'user', 'genres'));
+            return view('bands.show_band', compact('band', 'genreName', 'user', 'genres', 'imagePath'));
         }
 
 

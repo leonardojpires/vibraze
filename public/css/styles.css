@@ -154,6 +154,10 @@ body {
     color: white;
 }
 
+.form-check-input {
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
 /* ANIMATIONS / TRANSITIONS */
 
 .zoom-hover {

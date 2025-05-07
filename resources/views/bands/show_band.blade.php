@@ -133,7 +133,6 @@
 
                     <div class="input-group mb-3">
                         <input type="file" name="image" accept="image/*" class="form-control" id="image">
-                        <label class="input-group-text" for="image_url">Upload</label>
                     </div>
 
                     <input type="submit" class="btn btn-success" value="Save">
