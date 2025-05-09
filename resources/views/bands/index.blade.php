@@ -26,47 +26,49 @@
         <h2 class="text-secondary mb-3 fs-3">Find Your Favorite Bands</h2>
     </div>
 
-    <div class="mb-3 search-input d-flex">
-        <form action="{{ route('bands.list') }}" method="GET" class="d-flex w-100">
-            <div class="input-group me-2">
-                <input type="text" class="form-control" name="search" placeholder="Search" aria-label="Search input" aria-describedby="button-search" value="{{ request('search') }}">
-                <button class="btn" type="submit" id="button-addon2">Search</button>
-            </div>
-            @if (request('search'))
-                <a href="{{ route('bands.list') }}" class="btn btn-secondary">Clear</a>
-            @endif
-        </form>
+    <div class="search-container d-flex flex-column justify-content-center">
+        <div class="mb-3 search-input d-flex">
+            <form action="{{ route('bands.list') }}" method="GET" class="d-flex w-100 w-sm-75 mx-auto">
+                <div class="input-group me-2">
+                    <input type="text" class="form-control" name="search" placeholder="Search" aria-label="Search input" aria-describedby="button-search" value="{{ request('search') }}">
+                    <button class="btn" type="submit" id="button-addon2">Search</button>
+                </div>
+                @if (request('search'))
+                    <a href="{{ route('bands.list') }}" class="btn btn-secondary">Clear</a>
+                @endif
+            </form>
+        </div>
 
-    </div>
 
-    @if ($genres->count() > 0)
-        <div class="mb-5 w-100">
-            <div class="genres-scroll-effect">
-                <div class="genres-container">
-                    <form action="{{ route('bands.list') }}" method="GET" class="d-flex flex-row flex-wrap gap-3 w-75">
-                        @foreach ($genres as $genre)
-                            <div class="genre-item">
-                                <input
-                                    class="form-check-input d-none flex-wrap genres-check"
-                                    type="checkbox"
-                                    name="genres[]"
-                                    value="{{ $genre->id }}"
-                                    id="genre-{{ $genre->id }}" {{ in_array($genre->id, request()->get('genres', [])) ? 'checked' : '' }}
-                                    onchange="this.form.submit()"
-                                >
-                                <label
-                                    class="form-check-label btn btn-outline-success btn-sm {{ in_array($genre->id, request()->get('genres', [])) ? 'active' : '' }} "
-                                    for="genre-{{ $genre->id }}">{{ $genre->name }}</label
-                                >
-                            </div>
-                        @endforeach
-                    </form>
+        @if ($genres->count() > 0)
+            <div class="mb-5 w-100">
+                <div class="genres-scroll-effect">
+                    <div class="genres-container">
+                        <form action="{{ route('bands.list') }}" method="GET" class="d-flex flex-row flex-wrap gap-3 w-75">
+                            @foreach ($genres as $genre)
+                                <div class="genre-item">
+                                    <input
+                                        class="form-check-input d-none flex-wrap genres-check"
+                                        type="checkbox"
+                                        name="genres[]"
+                                        value="{{ $genre->id }}"
+                                        id="genre-{{ $genre->id }}" {{ in_array($genre->id, request()->get('genres', [])) ? 'checked' : '' }}
+                                        onchange="this.form.submit()"
+                                    >
+                                    <label
+                                        class="form-check-label btn btn-outline-success btn-sm {{ in_array($genre->id, request()->get('genres', [])) ? 'active' : '' }} "
+                                        for="genre-{{ $genre->id }}">{{ $genre->name }}</label
+                                    >
+                                </div>
+                            @endforeach
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    @endif
+        @endif
+    </div>
 
-    <div class="mb-5 d-flex flex-row flex-wrap justify-content-start align-content-center gap-5">
+    <div class="bands-container mb-5 d-flex flex-wrap justify-content-lg-start justify-content-center align-content-center gap-5 ">
         @if ($bands->count() > 0)
             @foreach ($bands as $band)
 
@@ -121,7 +123,7 @@
             </div>
         @endif
     </div>
-    <div class="d-flex justify-content-center mt-4">
+    <div class="page-selector d-flex justify-content-center mt-4">
         {{ $bands->appends(request()->except('page'))->links() }}
     </div>
 </section>

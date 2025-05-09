@@ -85,7 +85,7 @@
 
 
                 <div class="mt-4 d-flex justify-content-end gap-2">
-                    <a href="{{ route('users.list') }}" class="btn btn-success">Voltar à Lista</a>
+                    <a href="{{ route('users.list') }}" class="btn btn-success">Go Back</a>
                 </div>
             </div>
         </div>

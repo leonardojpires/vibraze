@@ -1,7 +1,17 @@
-/* ---------- GERAL ---------- */
+/* ---------- GENERAL ---------- */
 body {
     background-color: #e4e4e4;
     overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+    text-align: center;
+}
+
+@media (min-width: 775px) {
+    h1, h2, h3, h4 {
+        text-align: left;
+    }
 }
 
 /* ---------- NAVBAR ---------- */
@@ -50,6 +60,10 @@ body {
     margin-top: 10px;
 }
 
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
 /* ---------- DARK MODE BUTTON ---------- */
 #darkModeToggle {
     margin-top: 1rem;
@@ -95,14 +109,31 @@ body {
     border-color: rgba(83, 249, 74, 0.1);
 }
 
+@media (max-width: 775px) {
+    .search-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
 /* ---------- GENRES ---------- */
 .genres-container {
     width: 75%;
     overflow-x: auto;
     white-space: nowrap;
-    margin-left: 21px;
+    /* margin-left: 21px; */
     padding-bottom: 0.8rem;
 }
+
+@media (max-width: 775px) {
+.genres-container {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+}
+
 
 .genres-container::-webkit-scrollbar {
     height: 8px;
@@ -128,6 +159,19 @@ body {
 
 .genres-container .genre-item {
     display: inline-block;
+}
+
+/* BANDS */
+
+.bands-container {
+    justify-content: center;
+}
+
+
+@media (min-width: 992px) {
+    .bands-container {
+        width: 75%;
+    }
 }
 
 /* ---------- FAVORITES ---------- */
@@ -173,6 +217,10 @@ body {
     background-color: #198754;
     border-color: #198754;
     color: white;
+}
+
+.page-selector {
+    transform: translate(-12em);
 }
 
 /* ---------- FORM CHECKBOX ---------- */

@@ -39,7 +39,7 @@
                                     <td>{{$user->email}}</td>
                                     <td>{{$user->created_at}}</td>
                                     <td>{{$user->role}}</td>
-                                    <td><a href="{{ route('users.show', $user->id) }}" class="btn btn-info" >Show</a></td>
+                                    <td><a href="{{ route('users.show', $user->id) }}" class="btn btn-info">&#128221;</a></td>
                                     <td><a href="{{ route('users.delete', $user->id) }}" class="btn btn-danger" >Delete</a></td>
                                 </tr>
                             @endforeach
