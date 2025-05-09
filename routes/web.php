@@ -15,7 +15,7 @@ Route::fallback([HomeController::class, 'fallback']);
 
 
 # Routes for BandsController
-Route::get('/list-bands', [BandsController::class, 'listBands'])->name('bands.list')->middleware('auth');
+Route::get('/list-bands', [BandsController::class, 'listBands'])->name('bands.list');
 
 Route::get('/show-band/{bandId}', [BandsController::class, 'showBand'])->name('bands.show')->middleware('auth');
 

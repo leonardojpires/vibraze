@@ -17,7 +17,12 @@
     </div>
 
     <div class="d-flex flex-column gap-3">
-        <h1>Welcome back, <span class="text-decoration-underline text-success">{{ $user->name }}</span></h1>
+        @if (Auth::user())
+            <h1>Welcome back, <span class="text-decoration-underline text-success">{{ $user->name }}</span></h1>
+        @else
+            <span class="alert alert-warning w-50 py-2">You're not logged yet. <a href="{{ route('login') }}" class="alert-link">Sign in.</a>
+            </span>
+        @endif
         <h2 class="text-secondary mb-3 fs-3">Find Your Favorite Bands</h2>
     </div>
 
@@ -73,6 +78,7 @@
                     <p class="card-text">{{ $band->name }}</p>
 
                     <div class="d-flex flex-row gap-3">
+                    @if (Auth::user())
                         @if ($band->isFavoritedBy($user))
                             <form method="POST" action="{{ route('favorites.remove', $band->id) }}">
                                 @csrf
@@ -87,6 +93,7 @@
                                 <input type="submit" value="&#x2665;&#xfe0f;" class="favorite-button rounded-circle">
                             </form>
                         @endif
+                    @endif
                         <a href="{{ route('bands.show', $band->id) }}" class="btn btn-success">Infos</a>
 
                         @if (auth()->check() && $user->role === 'admin')

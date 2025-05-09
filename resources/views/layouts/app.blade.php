@@ -16,9 +16,10 @@
 
         @include('layouts.navbar');
 
-        <div class="main-content container mt-4">
+        <div class="main-content container mt-2">
             @yield('content')
         </div>
+
     </body>
 <script src="{{ asset('js/darkmode.js') }}"></script>
 

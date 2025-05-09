@@ -24,9 +24,13 @@
                 <li class="nav-item active">
                     <a class="nav-link text-white underline-hover" href="{{ route('bands.list') }}">Bands</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white underline-hover" href="{{ route('favorites.list') }}">Favorites</a>
-                </li>
+
+                @if (Auth::user())
+                    <li class="nav-item">
+                        <a class="nav-link text-white underline-hover" href="{{ route('favorites.list') }}">Favorites</a>
+                    </li>
+                @endif
+
                 @if (Auth::user() && Auth::user()->role == 'admin')
                     <li class="nav-item">
                         <a class="nav-link text-white underline-hover" href="{{ route('bands.add') }}">Add Bands</a>
@@ -48,7 +52,7 @@
             <div class="d-flex flex-column align-items-center justify-content-center gap-2 mb-3 mt-3">
                 @if (Auth::user())
                     <a href="{{ route('users.show', Auth::user()->id) }}" class="mb-2">
-                        <img src="{{ $user->image ? asset('storage/' . $user->image) : asset('images/profile/user_profile.png') }}" alt="User Profile" class="profile-icon shadow">
+                        <img src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : asset('images/profile/user_profile.png') }}" alt="User Profile" class="profile-icon shadow">
                     </a>
                 @endif
 
