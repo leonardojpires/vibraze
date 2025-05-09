@@ -20,8 +20,8 @@
                 @csrf
 
                 <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" name="name" class="form-control" id="nome" aria-describedby="name" required>
+                    <label for="name" class="form-label">Genre Name</label>
+                    <input type="text" placeholder="Ex: Rock" name="name" class="form-control" id="nome" aria-describedby="name" required>
                 </div>
 
                 <button type="submit" class="btn btn-success">Submit</button>
@@ -43,7 +43,7 @@
 
               <div class="text-danger">
                 @error('name')
-                    Invalid Name!
+                    Invalid Genre Name!
                 @enderror
 
         </div>

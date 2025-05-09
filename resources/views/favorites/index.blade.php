@@ -24,7 +24,7 @@
         @if ($bands->count() > 0)
             @foreach ($bands as $band)
 
-                <div class="card" style="width: 18rem;">
+                <div class="card card_effect" style="width: 18rem;">
 
                     <img src="{{ $band->image ? asset('storage/' . $band->image) : asset('images/soad.png') }}" class="card-img-top" alt="{{ $band->name }}">
                     <div class="card-body">

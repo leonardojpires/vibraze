@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <img src="{{ asset("images/$band->image_url.png") }}" class="img-fluid rounded" alt="{{ $band->name }}">
+                    <img src="{{ $band->image ? asset('storage/' . $band->image) : asset('images/soad.png') }}" class="img-fluid rounded" alt="{{ $band->name }}">
                 </div>
             </div>
         </div>
@@ -139,6 +139,69 @@
                     <a href="{{ route('bands.list') }}" class="btn btn-outline-secondary">Go Back</a>
                 </div>
                 </form>
+
+                <div class="text-danger">
+                    @error('name')
+                        Invalid Name!
+                    @enderror
+
+                    @error('genre_id')
+                        Invalid Genre!
+                    @enderror
+
+                    @error('formation_year')
+                        Invalid Year!
+                    @enderror
+
+                    @error('description')
+                        Invalid Description!
+                    @enderror
+
+                    @error('singer')
+                        Invalid Singer!
+                    @enderror
+
+                    @error('backing_vocals')
+                        Invalid Backing Vocals!
+                    @enderror
+
+                    @error('rythm_guitarist')
+                        Invalid Rhythm Guitarist!
+                    @enderror
+
+                    @error('lead_guitarist')
+                        Invalid Lead Guitarist!
+                    @enderror
+
+                    @error('bassist')
+                        Invalid Bassist!
+                    @enderror
+
+                    @error('drummer')
+                        Invalid Drummer!
+                    @enderror
+
+                    @error('percurssionist')
+                        Invalid Percussionist!
+                    @enderror
+
+                    @error('keyboardist')
+                        Invalid Keyboardist!
+                    @enderror
+
+                    @error('dj')
+                        Invalid DJ!
+                    @enderror
+
+                    @error('best_selled_album')
+                        Invalid Album!
+                    @enderror
+
+                    @error('image')
+                        Invalid Image!
+                    @enderror
+                </div>
+
             </div>
     @endif
 

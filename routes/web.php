@@ -48,6 +48,18 @@ Route::get('/registration', [UserController::class, 'addUserView'])->name('users
 
 Route::get('/login', [UserController::class, 'loginView'])->name('login');
 
+Route::get('/list-users', [UserController::class, 'listUsers'])->name('users.list')->middleware(['auth', 'admin']);
+
+Route::get('/delete-user/{userId}', [UserController::class, 'deleteUser'])->name('users.delete')->middleware(['auth', 'admin']);
+
+Route::get('/show-user/{userId}', [UserController::class, 'showUser'])->name('users.show')->middleware('auth');
+
+Route::put('/show-user/{userId}/role', [UserController::class, 'updateRole'])->name('users.role')->middleware('auth', 'admin');
+
+Route::get('/edit-user/{userId}', [UserController::class, 'editUser'])->name('users.edit')->middleware('auth');
+
+Route::put('/update-user/{userId}', [UserController::class, 'updateUser'])->name('users.update')->middleware('auth');
+
 Route::post('/create-user', [UserController::class, 'storeUser'])->name('users.store');
 
 Route::post('/logout', [UserController::class, 'logout'])->name('users.logout')->middleware('auth');;

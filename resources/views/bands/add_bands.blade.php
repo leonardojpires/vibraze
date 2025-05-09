@@ -97,24 +97,67 @@
 
             </form>
 
-              <div class="text-danger">
+            <div class="text-danger">
                 @error('name')
                     Invalid Name!
                 @enderror
+
                 @error('genre_id')
                     Invalid Genre!
                 @enderror
+
                 @error('formation_year')
                     Invalid Year!
                 @enderror
+
                 @error('description')
                     Invalid Description!
                 @enderror
-                @error('image_url')
-                    Invalid Image!
+
+                @error('singer')
+                    Invalid Singer!
                 @enderror
 
-        </div>
+                @error('backing_vocals')
+                    Invalid Backing Vocals!
+                @enderror
+
+                @error('rythm_guitarist')
+                    Invalid Rhythm Guitarist!
+                @enderror
+
+                @error('lead_guitarist')
+                    Invalid Lead Guitarist!
+                @enderror
+
+                @error('bassist')
+                    Invalid Bassist!
+                @enderror
+
+                @error('drummer')
+                    Invalid Drummer!
+                @enderror
+
+                @error('percurssionist')
+                    Invalid Percussionist!
+                @enderror
+
+                @error('keyboardist')
+                    Invalid Keyboardist!
+                @enderror
+
+                @error('dj')
+                    Invalid DJ!
+                @enderror
+
+                @error('best_selled_album')
+                    Invalid Album!
+                @enderror
+
+                @error('image')
+                    Invalid Image!
+                @enderror
+            </div>
     </div>
     <script src="{{ asset('js/darkmode.js') }}"></script>
 

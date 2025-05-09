@@ -1,23 +1,35 @@
+/* ---------- GERAL ---------- */
 body {
     background-color: #e4e4e4;
     overflow-x: hidden;
 }
 
-/* NAVBAR */
+/* ---------- NAVBAR ---------- */
 
 .navbar {
     background-color: #1e1e1e;
-    width: 250px;
-    height: 100vh;
-    position: fixed;
-    padding-top: 20px;
-    top: 0;
-    left: 0;
+    width: 100%;
+    padding: 1rem 1rem;
+}
+
+@media (min-width: 992px) {
+    .navbar {
+        width: 250px;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding-top: 20px;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .main-content {
+        margin-left: 250px;
+    }
 }
 
 .navbar .navbar-brand {
-    /* margin-left: 1em; */
-    margin-right: 0 !important;
     font-size: 1.5em;
     border-bottom: 4px solid #464646;
     color: rgba(72, 255, 62, 0.641);
@@ -31,19 +43,26 @@ body {
 .navbar .nav-link {
     padding: 10px 15px;
     font-size: 1.2em;
+    color: white;
 }
 
 .navbar .nav-item + .nav-item {
     margin-top: 10px;
 }
 
-/* CONTENT */
-
-.main-content {
-    margin-left: 300px;
-    width: 1250px;
+/* ---------- DARK MODE BUTTON ---------- */
+#darkModeToggle {
+    margin-top: 1rem;
 }
 
+/* ---------- PROFILE IMAGE ---------- */
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+/* ---------- SEARCH ---------- */
 .search-input {
     max-width: 75%;
     width: 100%;
@@ -51,7 +70,8 @@ body {
 
 .search-input input {
     outline: 1px solid transparent;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+                rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 .search-input input:focus {
@@ -62,7 +82,8 @@ body {
 .search-input button {
     background-color: white;
     outline: 1px solid transparent;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+                rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 .search-input button:hover {
@@ -74,15 +95,13 @@ body {
     border-color: rgba(83, 249, 74, 0.1);
 }
 
+/* ---------- GENRES ---------- */
 .genres-container {
     width: 75%;
     overflow-x: auto;
     white-space: nowrap;
-    /* background-color: #121212; */
-    /* padding: 10px; */
     margin-left: 21px;
     padding-bottom: 0.8rem;
-    /* box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; */
 }
 
 .genres-container::-webkit-scrollbar {
@@ -111,9 +130,8 @@ body {
     display: inline-block;
 }
 
+/* ---------- FAVORITES ---------- */
 .favorite-button {
-    /* background-color: rgb(209, 209, 209); */
-    /* border-radius: 50%; */
     outline: none;
     border: none;
     font-size: 1.2em;
@@ -127,25 +145,28 @@ body {
     transition: 0.5s ease;
 }
 
-.card {
+/* ---------- CARD EFFECT ---------- */
+.card_effect {
     transform: scale(1);
     transition: 0.5s ease-out;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+                rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
-.card:hover {
+.card_effect:hover {
     transform: scale(1.1);
     transition: 0.5s;
     box-shadow: 0 0 15px rgba(47, 132, 42, 0.586);
     cursor: pointer;
 }
 
+/* ---------- PAGINATION ---------- */
 .page-link {
-    color: #198754; /* verde Bootstrap (success) */
+    color: #198754;
 }
 
 .page-link:hover {
-    color: #146c43; /* verde escuro no hover */
+    color: #146c43;
 }
 
 .page-item.active .page-link {
@@ -154,21 +175,20 @@ body {
     color: white;
 }
 
+/* ---------- FORM CHECKBOX ---------- */
 .form-check-input {
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px,
+                rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
-/* ANIMATIONS / TRANSITIONS */
-
+/* ---------- ANIMATIONS ---------- */
 .zoom-hover {
-    transition: transform 0.3 ease;
-    transition: 0.5s;
+    transition: transform 0.3s ease;
 }
 
 .zoom-hover:hover {
     color: rgba(83, 249, 74, 0.501);
     transform: scale(1.25);
-    transition: 0.5s;
 }
 
 .underline-hover {
@@ -188,23 +208,9 @@ body {
     width: 0;
     height: 2px;
     background: rgba(83, 249, 74, 0.501);
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .underline-hover:hover::before {
     width: 100%;
 }
-
-/* .link-active {
-    position: relative;
-}
-
-.link-active::before {
-    width: 100%;
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 0;
-    height: 2px;
-    background: rgba(83, 249, 74, 0.152);
-} */

@@ -8,6 +8,9 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
         <link rel="shortcut icon" href="{{ asset('images/logo/vibraze_logo_symbol_only.png') }}" type="image/x-icon">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+
+
     </head>
     <body>
 
@@ -16,6 +19,7 @@
         <div class="main-content container mt-4">
             @yield('content')
         </div>
-
     </body>
+<script src="{{ asset('js/darkmode.js') }}"></script>
+
 </html>
