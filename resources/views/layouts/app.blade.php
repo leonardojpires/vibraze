@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
         <link rel="shortcut icon" href="{{ asset('images/logo/vibraze_logo_symbol_only.png') }}" type="image/x-icon">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
-
+        <script src="{{ asset('js/show_modals.js') }}"></script>
 
     </head>
     <body>

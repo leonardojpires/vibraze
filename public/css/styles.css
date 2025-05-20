@@ -189,6 +189,12 @@ h1, h2, h3, h4 {
     transition: 0.5s ease;
 }
 
+/* BAND INFOS */
+
+.band-image {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
 /* ---------- CARD EFFECT ---------- */
 .card_effect {
     transform: scale(1);

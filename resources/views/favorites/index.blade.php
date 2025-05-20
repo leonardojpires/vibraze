@@ -20,7 +20,7 @@
 
     </div>
 
-    <div class="mb-5 d-flex flex-row flex-wrap justify-content-start align-content-center gap-5">
+    <div class="bands-container mb-5 d-flex flex-row flex-wrap justify-content-start align-content-center gap-5">
         @if ($bands->count() > 0)
             @foreach ($bands as $band)
 
@@ -49,7 +49,7 @@
             </div>
         @endif
     </div>
-    <div class="d-flex justify-content-center mt-4">
+    <div class="d-flex justify-content-start mt-4">
         {{ $bands->appends(request()->except('page'))->links() }}
     </div>
 

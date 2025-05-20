@@ -7,14 +7,15 @@
             <!-- Card de Login -->
             <div class="card shadow-lg border-0 rounded-lg">
                 <div class="card-header text-center py-4 bg-success text-white">
-                    <h2 class="fw-bold">Login to Your Account</h2>
+                    <h2 class="fw-bold">Set Your New Password</h2>
                 </div>
                 <div class="card-body p-4">
-                    <form method="POST" action="{{ route('login.store') }}">
+                    <form method="POST" action="{{ route('password.update') }}">
                         @csrf
+
                         <div class="mb-3">
                             <label for="email" class="form-label">Email Address</label>
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autofocus>
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ request()->email }}" required readonly>
                             @error('email')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -28,17 +29,16 @@
                             @enderror
                         </div>
 
-                        <div class="d-flex justify-content-between mb-1">
-                            <div class="d-flex justify-content-between align-items-center gap-3">
-                                <button type="submit" class="btn btn-success w-48">Log In</button>
-                                <div>
-                                    <input type="checkbox" name="remember" id="remember" class="form-check-input">
-                                    <label for="remember" class="form-check-label">Keep me logged in</label>
-                                </div>
-                            </div>
-                            <a href="{{ route('users.add') }}" class="btn btn-outline-success w-48 text-decoration-none text-center">Don't have an account?</a>
+                        <div class="mb-3">
+                            <label for="password_confirmation" class="form-label">Password Confirmation</label>
+                            <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation" name="password_confirmation" required>
+                            @error('password_confirmation')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
-                        <a href="{{ route('password.request') }}" class="btn btn-link">Forgot your password?</a>
+
+                        <input type="hidden" name="token" value="{{ request()->token }}">
+                        <button type="submit" class="btn btn-success">Update Password</button>
                     </form>
                 </div>
             </div>

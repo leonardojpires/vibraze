@@ -15,7 +15,7 @@
     </div>
 
     {{-- USER --}}
-    @if (auth()->check() && $user->role == 'user')
+    @if (!auth()->check() || $user->role == 'user')
         <div class="container mb-3 darkmode-container">
             <div class="row">
                 <div class="col-md-6">
@@ -47,8 +47,8 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">
-                    <img src="{{ $band->image ? asset('storage/' . $band->image) : asset('images/soad.png') }}" class="img-fluid rounded" alt="{{ $band->name }}">
+                <div class="col-md-6 mt-3">
+                    <img src="{{ $band->image ? asset('storage/' . $band->image) : asset('images/soad.png') }}" class="band-image img-fluid rounded" alt="{{ $band->name }}" width="450">
                 </div>
             </div>
         </div>
