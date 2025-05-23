@@ -99,13 +99,7 @@
                                 <a href="{{ route('bands.show', $band->id) }}" class="btn btn-success">Infos</a>
 
                                 @if (auth()->check() && $user->role === 'admin')
-                                    <form method="POST" action="{{ route('bands.remove', $band->id) }}">
-                                        @csrf
-                                        @method('DELETE')
-
-                                        <input type="hidden" name="band_id" value="{{ $band->id }}">
-                                        <button type="submit" class="btn btn-danger">Remove</button>
-                                    </form>
+                                    <button data-user-id="{{ $user->id }}" class="btn btn-danger">Remove</button>
                                 @endif
 
                             </div>
@@ -123,6 +117,24 @@
 
         <div class="d-flex justify-content-center justify-content-lg-start mt-4">
             {{ $bands->appends(request()->except('page'))->links('pagination::bootstrap-5') }}
+        </div>
+
+        <div class="modal fade" id="deleteBandModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirmation</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete this user?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a href="#" id="confirmDeleteLink" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </section>

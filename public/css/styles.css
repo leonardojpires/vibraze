@@ -1,4 +1,8 @@
 /* ---------- GENERAL ---------- */
+* {
+    box-sizing: border-box;
+}
+
 body {
     background-color: #e4e4e4;
     overflow-x: hidden;
@@ -12,6 +16,24 @@ h1, h2, h3, h4 {
     h1, h2, h3, h4 {
         text-align: left;
     }
+}
+
+.main-content {
+    padding: 0;
+}
+
+/* LANDING PAGE */
+
+.vibraze-hero {
+    padding: 150px 0;
+
+    background-color: #00000069;
+    background-image:
+    linear-gradient(rgba(0, 0, 0, 0.36), rgba(0, 0, 0, 0.779)),
+    url('../images/landing_page/hero_image_2.png');
+    background-size: cover;
+    background-position: center;
+    animation: scrollX 20s linear infinite;
 }
 
 /* ---------- NAVBAR ---------- */
@@ -36,6 +58,7 @@ h1, h2, h3, h4 {
 
     .main-content {
         margin-left: 300px;
+        max-width: 100%;
     }
 }
 
@@ -267,4 +290,14 @@ h1, h2, h3, h4 {
 
 .underline-hover:hover::before {
     width: 100%;
+}
+
+@keyframes scrollX {
+    0% {
+        background-position: 0 0, 0 0, 0 0;
+    }
+
+    100% {
+        background-position: -1323px 0, -1323px 0, 0 0;
+    }
 }
