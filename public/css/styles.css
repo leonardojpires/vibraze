@@ -1,23 +1,68 @@
+/* ---------- GENERAL ---------- */
+* {
+    box-sizing: border-box;
+}
+
 body {
     background-color: #e4e4e4;
     overflow-x: hidden;
 }
 
-/* NAVBAR */
+h1, h2, h3, h4 {
+    text-align: center;
+}
+
+@media (min-width: 775px) {
+    h1, h2, h3, h4 {
+        text-align: left;
+    }
+}
+
+.main-content {
+    padding: 0;
+}
+
+/* LANDING PAGE */
+
+.vibraze-hero {
+    padding: 150px 0;
+
+    background-color: #00000069;
+    background-image:
+    linear-gradient(rgba(0, 0, 0, 0.36), rgba(0, 0, 0, 0.779)),
+    url('../images/landing_page/hero_image_2.png');
+    background-size: cover;
+    background-position: center;
+    animation: scrollX 20s linear infinite;
+}
+
+/* ---------- NAVBAR ---------- */
 
 .navbar {
     background-color: #1e1e1e;
-    width: 250px;
-    height: 100vh;
-    position: fixed;
-    padding-top: 20px;
-    top: 0;
-    left: 0;
+    width: 100%;
+    padding: 1rem 1rem;
+}
+
+@media (min-width: 992px) {
+    .navbar {
+        width: 250px;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding-top: 20px;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .main-content {
+        margin-left: 300px;
+        max-width: 100%;
+    }
 }
 
 .navbar .navbar-brand {
-    /* margin-left: 1em; */
-    margin-right: 0 !important;
     font-size: 1.5em;
     border-bottom: 4px solid #464646;
     color: rgba(72, 255, 62, 0.641);
@@ -31,19 +76,30 @@ body {
 .navbar .nav-link {
     padding: 10px 15px;
     font-size: 1.2em;
+    color: white;
 }
 
 .navbar .nav-item + .nav-item {
     margin-top: 10px;
 }
 
-/* CONTENT */
-
-.main-content {
-    margin-left: 300px;
-    width: 1250px;
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
+/* ---------- DARK MODE BUTTON ---------- */
+#darkModeToggle {
+    margin-top: 1rem;
+}
+
+/* ---------- PROFILE IMAGE ---------- */
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+/* ---------- SEARCH ---------- */
 .search-input {
     max-width: 75%;
     width: 100%;
@@ -51,7 +107,8 @@ body {
 
 .search-input input {
     outline: 1px solid transparent;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+                rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 .search-input input:focus {
@@ -62,7 +119,8 @@ body {
 .search-input button {
     background-color: white;
     outline: 1px solid transparent;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+                rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 .search-input button:hover {
@@ -74,9 +132,73 @@ body {
     border-color: rgba(83, 249, 74, 0.1);
 }
 
+@media (max-width: 775px) {
+    .search-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+/* ---------- GENRES ---------- */
+.genres-container {
+    width: 75%;
+    overflow-x: auto;
+    white-space: nowrap;
+    /* margin-left: 21px; */
+    padding-bottom: 0.8rem;
+}
+
+@media (max-width: 775px) {
+.genres-container {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+}
+
+
+.genres-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.genres-container::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+
+.genres-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.genres-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.genres-container form {
+    flex-wrap: nowrap !important;
+}
+
+.genres-container .genre-item {
+    display: inline-block;
+}
+
+/* BANDS */
+
+.bands-container {
+    justify-content: center;
+}
+
+
+@media (min-width: 992px) {
+    .bands-container {
+        width: 75%;
+    }
+}
+
+/* ---------- FAVORITES ---------- */
 .favorite-button {
-    /* background-color: rgb(209, 209, 209); */
-    /* border-radius: 50%; */
     outline: none;
     border: none;
     font-size: 1.2em;
@@ -90,25 +212,34 @@ body {
     transition: 0.5s ease;
 }
 
-.card {
-    transform: scale(1);
-    transition: 0.5s ease-out;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+/* BAND INFOS */
+
+.band-image {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
-.card:hover {
+/* ---------- CARD EFFECT ---------- */
+.card_effect {
+    transform: scale(1);
+    transition: 0.5s ease-out;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+                rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+.card_effect:hover {
     transform: scale(1.1);
     transition: 0.5s;
     box-shadow: 0 0 15px rgba(47, 132, 42, 0.586);
     cursor: pointer;
 }
 
+/* ---------- PAGINATION ---------- */
 .page-link {
-    color: #198754; /* verde Bootstrap (success) */
+    color: #198754;
 }
 
 .page-link:hover {
-    color: #146c43; /* verde escuro no hover */
+    color: #146c43;
 }
 
 .page-item.active .page-link {
@@ -117,17 +248,24 @@ body {
     color: white;
 }
 
-/* ANIMATIONS / TRANSITIONS */
+.page-selector {
+    transform: translate(-12em);
+}
 
+/* ---------- FORM CHECKBOX ---------- */
+.form-check-input {
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px,
+                rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+/* ---------- ANIMATIONS ---------- */
 .zoom-hover {
-    transition: transform 0.3 ease;
-    transition: 0.5s;
+    transition: transform 0.3s ease;
 }
 
 .zoom-hover:hover {
     color: rgba(83, 249, 74, 0.501);
     transform: scale(1.25);
-    transition: 0.5s;
 }
 
 .underline-hover {
@@ -147,23 +285,19 @@ body {
     width: 0;
     height: 2px;
     background: rgba(83, 249, 74, 0.501);
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .underline-hover:hover::before {
     width: 100%;
 }
 
-/* .link-active {
-    position: relative;
-}
+@keyframes scrollX {
+    0% {
+        background-position: 0 0, 0 0, 0 0;
+    }
 
-.link-active::before {
-    width: 100%;
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 0;
-    height: 2px;
-    background: rgba(83, 249, 74, 0.152);
-} */
+    100% {
+        background-position: -1323px 0, -1323px 0, 0 0;
+    }
+}

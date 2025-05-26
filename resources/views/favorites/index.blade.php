@@ -5,11 +5,6 @@
 <div>
     <div class="d-flex gap-3 align-items-center mb-4">
         <h1 class="mb-3">Favorited Bands</h1>
-        <button id="darkModeToggle" class="btn btn-outline-secondary ms-3">
-            <span id="darkModeIcon" class="material-icons">
-                light_mode
-            </span>
-        </button>
     </div>
 
 {{--     <div class="mb-5 search-input d-flex">
@@ -25,13 +20,13 @@
 
     </div>
 
-    <div class="mb-5 d-flex flex-row flex-wrap justify-content-start align-content-center gap-5">
+    <div class="bands-container mb-5 d-flex flex-row flex-wrap justify-content-start align-content-center gap-5">
         @if ($bands->count() > 0)
             @foreach ($bands as $band)
 
-                <div class="card" style="width: 18rem;">
+                <div class="card card_effect" style="width: 18rem;">
 
-                    <img src="{{ asset("images/$band->image_url.png") }}" class="card-img-top" alt="{{ $band->name }}">
+                    <img src="{{ $band->image ? asset('storage/' . $band->image) : asset('images/soad.png') }}" class="card-img-top" alt="{{ $band->name }}">
                     <div class="card-body">
 
                     <p class="card-text">{{ $band->name }}</p>
@@ -54,7 +49,7 @@
             </div>
         @endif
     </div>
-    <div class="d-flex justify-content-center mt-4">
+    <div class="d-flex justify-content-start mt-4">
         {{ $bands->appends(request()->except('page'))->links() }}
     </div>
 

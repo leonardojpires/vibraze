@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Bands;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FavoritesController extends Controller
 {
     public function favoriteBandsView() {
-        $user = User::find(1);
+        $user = Auth::user();
         $bands = $user->favoriteBands()->paginate(10);
 
         return view('favorites.index', compact('bands', 'user'));
@@ -18,7 +19,7 @@ class FavoritesController extends Controller
     public function favoriteBands(Request $request, $bandId) {
         $band = Bands::findOrFail($bandId); # Find the band by its ID
 
-        $user = User::find(1);
+        $user = Auth::user();
 
         if ($user->favoriteBands()->where('band_id', $bandId)->exists()) {
             return redirect()->back()->with('error', 'You have already favorited this band!');
@@ -30,7 +31,7 @@ class FavoritesController extends Controller
     }
 
     public function removeFavorites(Request $request, $bandId) {
-        $user = User::find(1);
+        $user = Auth::user();
         $band = Bands::findOrFail($bandId);
 
         if ($user->favoriteBands()->where('band_id', $bandId)->exists()) {
