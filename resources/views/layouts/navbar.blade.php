@@ -73,4 +73,4 @@
         </div>
         </nav>
     </header>
-    <script src="{{ asset('js/darkmode.js') }}"></script>
+    
