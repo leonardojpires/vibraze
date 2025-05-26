@@ -14,7 +14,7 @@
         @endif
     </div>
 
-    <div class="container mb-3 darkmode-container">
+    <div class="mb-3 darkmode-container">
         <form method="POST" action="{{ route('users.update', $user->id) }}"  class="w-50" enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -45,8 +45,11 @@
                 <input type="file" name="image" accept="image/*" class="form-control" id="image">
             </div>
 
-            <input type="submit" class="btn btn-success" value="Save">
-            <a href="{{ route('users.show', $user->id) }}" class="btn btn-outline-secondary">Go Back</a>
+            <div class="d-flex flex-column gap-3 justify-content-start align-items-start">
+                <input type="submit" class="btn btn-success" value="Save">
+                <a href="{{ route('users.show', $user->id) }}" class="btn btn-outline-secondary">Go Back</a>
+            </div>
+
         </div>
         </form>
 

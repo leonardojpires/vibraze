@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <main class="px-4 py-5 w-100" style="max-width: calc(100% - 250px);">
+
+    <section class="px-4 py-5 w-100" style="max-width: calc(100% - 250px);">
         @if (session('error'))
             <div class="alert alert-danger w-75 mx-auto">
                 {{ session('error') }}
@@ -12,7 +13,7 @@
             </div>
         @endif
 
-        <div class="d-flex justify-content-center">
+        <div class="bands-container d-flex justify-content-center">
             <div class="card border-success shadow w-100" style="max-width: 1000px;">
                 <div class="card-header bg-success text-white">
                     <h4 class="mb-0">User List</h4>
@@ -40,8 +41,11 @@
                                         <td>{{ $user->role }}</td>
                                         <td><a href="{{ route('users.show', $user->id) }}"
                                                 class="btn btn-info">&#128221;</a></td>
-                                        <td><button data-user-id="{{ $user->id }}"
-                                                class="btn btn-danger openDeleteModal">Delete</button></td>
+                                        <td><button
+                                            data-user-id="{{ $user->id }}"
+                                            data-action="{{ route('users.delete', $user->id) }}"
+                                            class="btn btn-danger openDeleteModal"
+                                            >Delete</button></td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -51,6 +55,7 @@
             </div>
         </div>
 
+        {{-- DELETE MODAL --}}
         <div class="modal fade" id="deleteUserModal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -63,11 +68,15 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <a href="#" id="confirmDeleteLink" class="btn btn-danger">Delete</a>
+                        <form method="POST" id="deleteUserForm">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" value="Delete" class="btn btn-danger">
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
 
-    </main>
+    </section>
 @endsection

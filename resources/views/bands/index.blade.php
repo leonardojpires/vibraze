@@ -99,7 +99,10 @@
                                 <a href="{{ route('bands.show', $band->id) }}" class="btn btn-success">Infos</a>
 
                                 @if (auth()->check() && $user->role === 'admin')
-                                    <button data-user-id="{{ $user->id }}" class="btn btn-danger">Remove</button>
+                                    <button
+                                    data-band-id="{{ $band->id }}"
+                                    data-action="{{ route('bands.remove', $band->id) }}"
+                                    class="btn btn-danger openBandDeleteModal">Remove</button>
                                 @endif
 
                             </div>
@@ -119,6 +122,7 @@
             {{ $bands->appends(request()->except('page'))->links('pagination::bootstrap-5') }}
         </div>
 
+        {{-- DELETE MODAL --}}
         <div class="modal fade" id="deleteBandModal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -127,18 +131,20 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p>Are you sure you want to delete this user?</p>
+                        <p>Are you sure you want to delete this band?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <a href="#" id="confirmDeleteLink" class="btn btn-danger">Delete</a>
+                        <form method="POST" id="deleteBandForm">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" value="Delete" class="btn btn-danger">
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
 
     </section>
-
-    <script src="{{ asset('js/darkmode.js') }}"></script>
 
 @endsection

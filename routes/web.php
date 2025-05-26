@@ -50,7 +50,7 @@ Route::get('/login', [UserController::class, 'loginView'])->name('login');
 
 Route::get('/list-users', [UserController::class, 'listUsers'])->name('users.list')->middleware(['auth', 'admin']);
 
-Route::get('/delete-user/{userId}', [UserController::class, 'deleteUser'])->name('users.delete')->middleware(['auth', 'admin']);
+Route::delete('/delete-user/{userId}', [UserController::class, 'deleteUser'])->name('users.delete')->middleware(['auth', 'admin']);
 
 Route::get('/show-user/{userId}', [UserController::class, 'showUser'])->name('users.show')->middleware('auth');
 

@@ -19,7 +19,7 @@
 
     {{-- ADMIN --}}
     @if (Auth::user() && Auth::user()->role === 'admin')
-        <div class="ms-auto px-4 py-5 w-100 d-flex justify-content-center">
+        <div class="ms-auto px-4 py-5 w-100 d-flex justify-content-center justify-content-lg-start">
             <div class="card border-success shadow w-100" style="max-width: 700px;">
                 <div class="card-header bg-success text-white">
                     <h4 class="mb-0">User Details</h4>
@@ -90,7 +90,7 @@
 
         {{-- USER --}}
     @elseif (Auth::user() && Auth::user()->role === 'user')
-        <div class="container ms-auto w-100 mb-5 darkmode-container">
+        <div class=" ms-auto w-100 mb-5 darkmode-container justify-content-center justify-content-lg-start">
             <div class="row">
                 <div class="col-12 d-flex flex-column">
 
@@ -117,7 +117,9 @@
                                 @endforeach
                             </div>
                         @else
-                            <span>You have no favorite bands.</span>
+                            <div class="text-center text-lg-start">
+                                <span>You have no favorite bands.</span>
+                            </div>
                         @endif
 
                     </div>
