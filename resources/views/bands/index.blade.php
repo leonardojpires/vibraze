@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <section>
+    <section class="px-2 px-lg-0">
 
         <div class="w-50">
             @if (session('error'))
@@ -66,8 +66,7 @@
             @endif
         </div>
 
-        <div
-            class="bands-container mb-5 d-flex flex-wrap justify-content-lg-start justify-content-center align-content-center gap-5 ">
+        <div class="bands-container mb-5 d-flex flex-wrap justify-content-lg-start justify-content-center align-content-center gap-5 ">
             @if ($bands->count() > 0)
                 @foreach ($bands as $band)
                     <div class="card card_effect" style="width: 18rem;">

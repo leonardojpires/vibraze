@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
-    <section class="px-4 py-5 w-100" style="max-width: calc(100% - 250px);">
+    <section class="mb-5 px-3 px-lg-0 py-5">
         @if (session('error'))
             <div class="alert alert-danger w-75 mx-auto">
                 {{ session('error') }}
@@ -41,11 +40,9 @@
                                         <td>{{ $user->role }}</td>
                                         <td><a href="{{ route('users.show', $user->id) }}"
                                                 class="btn btn-info">&#128221;</a></td>
-                                        <td><button
-                                            data-user-id="{{ $user->id }}"
-                                            data-action="{{ route('users.delete', $user->id) }}"
-                                            class="btn btn-danger openDeleteModal"
-                                            >Delete</button></td>
+                                        <td><button data-user-id="{{ $user->id }}"
+                                                data-action="{{ route('users.delete', $user->id) }}"
+                                                class="btn btn-danger openDeleteModal">Delete</button></td>
                                     </tr>
                                 @endforeach
                             </tbody>

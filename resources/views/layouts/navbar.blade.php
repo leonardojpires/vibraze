@@ -19,58 +19,63 @@
             </button>
 
 
-            <div class="collapse navbar-collapse d-lg-flex flex-lg-column align-items-center justify-content-between" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto d-flex justify-content-center align-items-center text-center w-100">
-                <li class="nav-item active">
-                    <a class="nav-link text-white underline-hover" href="{{ route('bands.list') }}">Bands</a>
-                </li>
-
-                @if (Auth::user())
-                    <li class="nav-item">
-                        <a class="nav-link text-white underline-hover" href="{{ route('favorites.list') }}">Favorites</a>
+            <div class="collapse navbar-collapse d-lg-flex flex-lg-column align-items-center justify-content-between"
+                id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto d-flex justify-content-center align-items-center text-center w-100">
+                    <li class="nav-item active">
+                        <a class="nav-link text-white underline-hover" href="{{ route('bands.list') }}">Bands</a>
                     </li>
-                @endif
 
-                @if (Auth::user() && Auth::user()->role == 'admin')
-                    <li class="nav-item">
-                        <a class="nav-link text-white underline-hover" href="{{ route('bands.add') }}">Add Bands</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white underline-hover" href="{{ route('genres.add') }}">Add Genres</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white underline-hover" href="{{ route('users.list') }}">All Users</a>
-                    </li>
-                @endif
-                <li>
-                    <button id="darkModeToggle" class="btn btn-outline-secondary">
-                        <span id="darkModeIcon" class="material-icons">light_mode</span>
-                    </button>
-                </li>
-            </ul>
+                    @if (Auth::user())
+                        <li class="nav-item">
+                            <a class="nav-link text-white underline-hover"
+                                href="{{ route('favorites.list') }}">Favorites</a>
+                        </li>
+                    @endif
 
-            <div class="d-flex flex-column align-items-center justify-content-center gap-2 mb-3 mt-3">
-                @if (Auth::user())
-                    <a href="{{ route('users.show', Auth::user()->id) }}" class="mb-2">
-                        <img src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : asset('images/profile/user_profile.png') }}" alt="User Profile" class="profile-icon shadow">
-                    </a>
-                @endif
+                    @if (Auth::user() && Auth::user()->role == 'admin')
+                        <li class="nav-item">
+                            <a class="nav-link text-white underline-hover" href="{{ route('bands.add') }}">Add Bands</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white underline-hover" href="{{ route('genres.add') }}">Add
+                                Genres</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white underline-hover" href="{{ route('users.list') }}">All
+                                Users</a>
+                        </li>
+                    @endif
+                    <li>
+                        <button id="darkModeToggle" class="btn btn-outline-secondary">
+                            <span id="darkModeIcon" class="material-icons">light_mode</span>
+                        </button>
+                    </li>
+                </ul>
 
-                @if (Route::has('login.store'))
-                    @auth
-                        <form class="d-flex mt-auto mb-5" role="logout" method="POST" action="{{ route('users.logout') }}">
-                            @csrf
-                            <button class="btn btn-outline-danger" type="submit">Log Out</button>
-                        </form>
-                    @else
-                        <a href="{{ route('login') }}" class="btn btn-success">Log in</a>
-                        @if (Route::has('users.add'))
-                            <a href="{{ route('users.add') }}" class="btn btn-outline-success">Register</a>
-                        @endif
-                    @endauth
-                @endif
+                <div class="d-flex flex-column align-items-center justify-content-center gap-2 mb-3 mt-3">
+                    @if (Auth::user())
+                        <a href="{{ route('users.show', Auth::user()->id) }}" class="mb-2">
+                            <img src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : asset('images/profile/user_profile.png') }}"
+                                alt="User Profile" class="profile-icon shadow">
+                        </a>
+                    @endif
+
+                    @if (Route::has('login.store'))
+                        @auth
+                            <form class="d-flex mt-auto mb-5" role="logout" method="POST"
+                                action="{{ route('users.logout') }}">
+                                @csrf
+                                <button class="btn btn-outline-danger" type="submit">Log Out</button>
+                            </form>
+                        @else
+                            <a href="{{ route('login') }}" class="btn btn-success">Log in</a>
+                            @if (Route::has('users.add'))
+                                <a href="{{ route('users.add') }}" class="btn btn-outline-success">Register</a>
+                            @endif
+                        @endauth
+                    @endif
+                </div>
             </div>
-        </div>
         </nav>
     </header>
-    
