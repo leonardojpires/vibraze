@@ -11,6 +11,6 @@ class HomeController extends Controller
     }
 
     public function fallback() {
-        return view('fallback.fallback');
+        return response()->view('fallback.fallback', [], 404);
     }
 }

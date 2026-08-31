@@ -1,122 +1,34 @@
 @extends('layouts.app')
 
+@section('title', $user->name . ' — Vibraze')
+
 @section('content')
+    @php
+        $userInitials = collect(preg_split('/\s+/', trim($user->name)))->filter()->take(2)->map(fn ($part) => strtoupper(substr($part, 0, 1)))->implode('');
+    @endphp
+    <section class="page-shell page-section page-section--narrow">
+        @include('partials.flash')
 
-    <section>
-        <div class="mb-5 px-3 px-lg-0 py-5">
-            <div class="w-100 w-md-50 mx-auto">
-                @if (session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                @elseif (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
+        @if (auth()->user()->role === 'admin')
+            <a class="back-link" href="{{ route('users.list') }}"><span aria-hidden="true">←</span> Back to users</a>
+        @else
+            <a class="back-link" href="{{ route('home') }}"><span aria-hidden="true">←</span> Back to home</a>
+        @endif
+
+        <div class="profile-header">
+            <span class="avatar avatar--large">{{ $userInitials ?: 'U' }}</span>
+            <div><span class="eyebrow">{{ auth()->user()->role === 'admin' ? 'Account review' : 'Your profile' }}</span><h1>{{ $user->name }}</h1><p>{{ $user->email }}</p><span class="profile-date">Member since {{ optional($user->created_at)->format('F Y') ?? '—' }}</span></div>
+        </div>
+
+        @if (auth()->user()->role === 'admin')
+            <div class="profile-grid">
+                <section class="info-card"><span class="eyebrow">Account access</span><h2>Role and permissions</h2><form method="POST" action="{{ route('users.role', $user->id) }}">@csrf @method('PUT')<div class="field"><label for="role">Account role</label><select id="role" name="role">@foreach (['user', 'admin'] as $role)<option value="{{ $role }}" {{ $user->role === $role ? 'selected' : '' }}>{{ ucfirst($role) }}</option>@endforeach</select></div><button class="button button--primary" type="submit">Update role</button></form></section>
+                <section class="info-card"><span class="eyebrow">Saved music</span><h2>{{ $user->favoriteBands->count() }} favorite {{ Str::plural('band', $user->favoriteBands->count()) }}</h2>@if ($user->favoriteBands->isNotEmpty())<div class="tag-list">@foreach ($user->favoriteBands as $band)<a href="{{ route('bands.show', $band->id) }}">{{ $band->name }}</a>@endforeach</div>@else<p class="muted">This user has not saved any bands.</p>@endif</section>
             </div>
-            <div>
-                {{-- ADMIN --}}
-                @if (Auth::user() && Auth::user()->role === 'admin')
-                    <div class="bands-container d-flex justify-content-center">
-                        <div class="card border-success shadow w-100" style="max-width: 700px;">
-                            <div class="card-header bg-success text-white">
-                                <h4 class="mb-0">User Details</h4>
-                            </div>
-                            <div class="card-body">
-                                <form action="{{ route('users.role', $user->id) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item d-flex justify-content-between flex-wrap">
-                                            <strong>Name:</strong>
-                                            <span>{{ $user->name }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between flex-wrap">
-                                            <strong>E-mail:</strong>
-                                            <span>{{ $user->email }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between flex-wrap">
-                                            <strong>Created At:</strong>
-                                            <span>{{ $user->created_at }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex flex-column gap-3 justify-content-center">
-                                            <strong>Favorited Bands:</strong>
-                                            @if (!$user->favoriteBands->isEmpty())
-                                                <p>
-                                                    @foreach ($user->favoriteBands as $band)
-                                                        <span>{{ $band->name }}</span>
-                                                    @endforeach
-                                                </p>
-                                            @else
-                                                <span>This user has no favorite bands.</span>
-                                            @endif
-                                        </li>
-                                        <li class="list-group-item d-flex flex-column justify-content-between">
-                                            <label for="role" class="form-label"><strong>Role:</strong></label>
-                                            <select name="role" id="role" class="form-select">
-                                                @foreach (['user', 'admin'] as $role)
-                                                    <option value="{{ $role }}"
-                                                        {{ $user->role == $role ? 'selected' : '' }}>
-                                                        {{ ucfirst($role) }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </li>
-                                    </ul>
-                                    <div>
-                                        <button type="submit" class="btn btn-outline-success">Update Role</button>
-                                    </div>
-                                </form>
-                                <div class="mt-4 d-flex justify-content-end gap-2">
-                                    <a href="{{ route('users.list') }}" class="btn btn-success">Go Back</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{-- USER --}}
-                @elseif (Auth::user() && Auth::user()->role === 'user')
-                    <div class=" ms-auto w-100 mb-5 darkmode-container justify-content-center justify-content-lg-start">
-                        <div class="row">
-                            <div class="col-12 d-flex flex-column">
-                                <div class="d-flex justify-content-center justify-content-md-start align-items-start mb-3">
-                                    <img src="{{ $user->image ? asset('storage/' . $user->image) : asset('images/profile/user_profile.png') }}"
-                                        class="rounded-circle shadow" alt="Profile Picture"
-                                        style="width: 250px; height: 250px; max-width: 100%; object-fit: cover;">
-                                </div>
-                                <h1 class="display-4 text-center text-md-start">{{ $user->name }}</h1>
-                                <p class="lead text-muted text-center text-md-start">{{ $user->email }}</p>
-                                <div class="mt-1 text-center text-md-start">
-                                    <p><strong>Member since:</strong> {{ $user->created_at->format('F Y') }}</p>
-                                </div>
-                                <div class="mt-4">
-                                    <h4>Favorite Bands</h4>
-                                    @if (!$user->favoriteBands->isEmpty())
-                                        <div class="d-flex flex-wrap gap-4">
-                                            @foreach ($user->favoriteBands as $band)
-                                                <span>{{ $band->name }}</span>
-                                            @endforeach
-                                        </div>
-                                    @else
-                                        <div class="text-center text-lg-start">
-                                            <span>You have no favorite bands.</span>
-                                        </div>
-                                    @endif
-                                </div>
-                                <div class="mt-4">
-                                    <h4>Favorite Genre</h4>
-                                    @if ($favoriteGenre !== 'None')
-                                        <p>{{ $favoriteGenre }}</p>
-                                    @endif
-                                </div>
-                                <div class="d-flex gap-2 mt-4 justify-content-center justify-content-md-start">
-                                    <a href="{{ route('home') }}" class="btn btn-outline-secondary">Back to Home</a>
-                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-success">Edit Profile</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endif
+        @else
+            <div class="profile-stats"><div><span>Favorite genre</span><strong>{{ $favoriteGenre !== 'None' ? $favoriteGenre : 'None yet' }}</strong></div><div><span>Saved bands</span><strong>{{ $user->favoriteBands->count() }}</strong></div><div><span>Account type</span><strong>{{ ucfirst($user->role) }}</strong></div></div>
+            <section class="detail-section"><div class="detail-section__heading"><span class="eyebrow">Saved bands</span><h2>Favorites</h2></div>@if ($user->favoriteBands->isNotEmpty())<div class="tag-list tag-list--large">@foreach ($user->favoriteBands as $band)<a href="{{ route('bands.show', $band->id) }}">{{ $band->name }} <span aria-hidden="true">→</span></a>@endforeach</div>@else<div class="empty-state empty-state--compact"><p>You have not saved any bands yet.</p><a class="button button--secondary" href="{{ route('bands.list') }}">Browse bands</a></div>@endif</section>
+            <div class="form-actions"><a class="button button--primary" href="{{ route('users.edit', $user->id) }}">Edit profile</a><a class="button button--quiet" href="{{ route('favorites.list') }}">View favorites</a></div>
+        @endif
     </section>
-
 @endsection

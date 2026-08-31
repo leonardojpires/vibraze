@@ -1,52 +1,55 @@
 @extends('layouts.app')
 
+@section('title', 'Your favorites — Vibraze')
+
 @section('content')
+    <section class="page-shell page-section">
+        @include('partials.flash')
 
-    <section class="px-2 px-lg-0">
-
-        <div class="w-50">
-            @if (session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @elseif (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
+        <div class="page-heading">
+            <div>
+                <span class="eyebrow">Favorites</span>
+                <h1>Your saved bands.</h1>
+                <p>Everything you’ve saved, in one place.</p>
+            </div>
+            <a class="button button--secondary" href="{{ route('bands.list') }}">Discover more</a>
         </div>
 
-        <div>
-            <h1 class="text-center text-lg-start mb-5">Favorited Bands</h1>
-        </div>
-
-        <div
-            class="bands-container mb-5 d-flex flex-wrap justify-content-lg-start justify-content-center align-content-center gap-5 ">
-            @if ($bands->count() > 0)
+        @if ($bands->count())
+            <div class="results-meta"><p><strong>{{ $bands->total() }}</strong> saved {{ Str::plural('band', $bands->total()) }}</p></div>
+            <div class="band-grid">
                 @foreach ($bands as $band)
-                    <div class="card card_effect" style="width: 18rem;">
-                        <img src="{{ $band->image ? asset('storage/' . $band->image) : asset('images/soad.png') }}"
-                            class="card-img-top" alt="{{ $band->name }}">
-                        <div class="card-body">
-                            <p class="card-text">{{ $band->name }}</p>
-                            <form method="POST" action="{{ route('favorites.remove', $band->id) }}">
-                                @csrf
-                                @method('DELETE')
-                                <input type="hidden" name="band_id" value="{{ $band->id }}">
-                                <input type="submit" value="&#10060;" class="favorite-button rounded-circle">
-                            </form>
+                    @php
+                        $bandInitials = collect(preg_split('/\s+/', trim($band->name)))
+                            ->filter()->take(2)->map(fn ($part) => strtoupper(substr($part, 0, 1)))->implode('');
+                    @endphp
+                    <article class="band-card band-card--favorite">
+                        <a class="band-card__identity" href="{{ route('bands.show', $band->id) }}">
+                            <span class="band-monogram">{{ $bandInitials ?: 'B' }}</span>
+                            <span class="band-card__meta"><span>{{ $band->genre->name ?? 'Uncategorized' }}</span><span>{{ $band->formation_year ?: 'Year unknown' }}</span></span>
+                        </a>
+                        <div class="band-card__body">
+                            <div><h2><a href="{{ route('bands.show', $band->id) }}">{{ $band->name }}</a></h2><p>{{ Str::limit($band->description, 105) }}</p></div>
+                            <div class="band-card__actions">
+                                <a class="text-link" href="{{ route('bands.show', $band->id) }}">View details <span aria-hidden="true">→</span></a>
+                                <form method="POST" action="{{ route('favorites.remove', $band->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="button button--quiet button--small" type="submit">Remove</button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
+                    </article>
                 @endforeach
-            @else
-                <div>
-                    <p>You don't have any favorite bands.</p>
-                </div>
-            @endif
-        </div>
-        <div class="d-flex justify-content-start mt-4">
-            {{ $bands->appends(request()->except('page'))->links() }}
-        </div>
-        </div>
+            </div>
+            <div class="pagination-wrap">{{ $bands->appends(request()->except('page'))->links('pagination::bootstrap-5') }}</div>
+        @else
+            <div class="empty-state">
+                <span class="empty-state__mark">♡</span>
+                <h2>No saved bands yet.</h2>
+                <p>Browse the catalog and save one to see it here.</p>
+                <a class="button button--primary" href="{{ route('bands.list') }}">Explore bands</a>
+            </div>
+        @endif
     </section>
 @endsection
