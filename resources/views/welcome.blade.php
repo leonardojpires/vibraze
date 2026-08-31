@@ -1,97 +1,83 @@
 @extends('layouts.app')
 
+@section('title', 'Vibraze — Browse and save bands')
+
 @section('content')
-    <section class="bands-container">
-
-        {{-- HERO --}}
-        <section class="container vibraze-hero mb-5">
-            <div class="align-items-center text-white text-center">
-                <div class="d-flex flex-column align-items-center justify-content-center w-50 mx-auto">
-                    <img src="{{ asset('images/logo/vibraze_logo_symbol_only.png') }}" alt="Vibraze" width="100"
-                        class="mb-3" style="pointer-events: none;">
-                    <h1 class="mb-4" style="font-size: 3rem;">Welcome to Vibraze</h1>
-                    <p class="lead">Find your favorite bands and discover more about them and their music! Get in touch
-                        with your favorite genres and artists! <span class="text-success font-weight-bold">Bend the strings
-                            of your life</span></p>
-                    <a href="#descobrir" class="btn btn-success mt-3" style="font-size: 1.5rem;">Find It Now</a>
+    @if (session('error') || session('success'))
+        <div class="page-shell landing-notice">@include('partials.flash')</div>
+    @endif
+    <section class="hero">
+        <div class="page-shell hero-grid">
+            <div class="hero-copy">
+                <span class="eyebrow">Your music catalog</span>
+                <h1>Keep track of the bands you love.</h1>
+                <p class="hero-lead">Search the catalog, filter by genre, and save the bands you want to hear again.</p>
+                <div class="hero-actions">
+                    <a class="button button--primary button--large" href="{{ route('bands.list') }}">Browse bands</a>
+                    @guest
+                        <a class="button button--secondary button--large" href="{{ route('users.add') }}">Create an account</a>
+                    @else
+                        <a class="button button--secondary button--large" href="{{ route('favorites.list') }}">My favorites</a>
+                    @endguest
+                </div>
+                <div class="hero-proof" aria-label="Vibraze highlights">
+                    <div><strong>Browse</strong><span>Search by name or genre</span></div>
+                    <div><strong>Save</strong><span>Keep your favorites together</span></div>
+                    <div><strong>Learn</strong><span>Read about each band</span></div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        {{-- CARDS --}}
-        <section
-            class="d-flex flex-column flex-lg-row justify-content-lg-between align-items-lg-stretch align-items-center justify-content-center mb-5 gap-5">
-
-            <div class="card card_effect" style="width: 18rem">
-                <div class="py-4" style="background-color: rgba(94, 211, 94, 0.688);"></div>
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">Search for bands</h5>
-                    <hr>
-                    <p class="card-text">You can search for bands by name or genre!</p>
-                    <div class="mt-auto"><a href="{{ route('bands.list') }}" class="card-link">Go for it</a></div>
-                </div>
+    <section class="section page-shell" aria-labelledby="how-it-works">
+        <div class="section-heading">
+            <div>
+                <span class="eyebrow">How it works</span>
+                <h2 id="how-it-works">A simple place for your favorite bands.</h2>
             </div>
+            <p>Look up a band, read the details, and save it for later. That’s all there is to it.</p>
+        </div>
 
-            <div class="card card_effect" style="width: 18rem">
-                <div class="py-4" style="background-color: rgba(94, 211, 94, 0.688);"></div>
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">Add a band to your favorites list</h5>
-                    <hr>
-                    <p class="card-text">Do you love a band? You can add it to your favorites list!</p>
-                    <div class="mt-auto">
-                        @if (auth()->check())
-                            <a href="{{ route('bands.list') }}" class="card-link">Check your favorites!</a>
-                        @else
-                            <a href="{{ route('login') }}">Log in to check your favorites list!</a>
-                        @endif
-                    </div>
-                </div>
+        <div class="feature-grid">
+            <article class="feature-card">
+                <span class="feature-number">01</span>
+                <h3>Find a band</h3>
+                <p>Search by name or use a genre filter to narrow down the list.</p>
+                <a class="text-link" href="{{ route('bands.list') }}">Open the catalog <span aria-hidden="true">→</span></a>
+            </article>
+            <article class="feature-card">
+                <span class="feature-number">02</span>
+                <h3>Save it</h3>
+                <p>Add any band to your favorites and come back to it whenever you like.</p>
+                @auth
+                    <a class="text-link" href="{{ route('favorites.list') }}">Open your favorites <span aria-hidden="true">→</span></a>
+                @else
+                    <a class="text-link" href="{{ route('login') }}">Sign in to start <span aria-hidden="true">→</span></a>
+                @endauth
+            </article>
+            <article class="feature-card">
+                <span class="feature-number">03</span>
+                <h3>See the pattern</h3>
+                <p>Your profile shows which genre appears most often in your saved bands.</p>
+                @auth
+                    <a class="text-link" href="{{ route('users.show', auth()->id()) }}">View your profile <span aria-hidden="true">→</span></a>
+                @else
+                    <a class="text-link" href="{{ route('users.add') }}">Create an account <span aria-hidden="true">→</span></a>
+                @endauth
+            </article>
+        </div>
+    </section>
+
+    <section class="section section--compact page-shell">
+        <div class="editorial-panel">
+            <div>
+                <span class="eyebrow eyebrow--light">Keep it simple</span>
+                <h2>Your shortlist.<br>Nothing else.</h2>
             </div>
-
-            <div class="card card_effect" style="width: 18rem">
-                <div class="py-4" style="background-color: rgba(94, 211, 94, 0.688);"></div>
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">Find out your favorite genre!</h5>
-                    <hr>
-                    <p class="card-text">You will see what genre you like the most based on your favorites!</p>
-                    <div class="mt-auto">
-                        @if (auth()->check())
-                            <a href="{{ route('bands.list') }}" class="card-link">Check your favorites!</a>
-                        @else
-                            <a href="{{ route('login') }}">Log in to check your favorite genre!</a>
-                        @endif
-                    </div>
-                </div>
+            <div>
+                <p>No feeds or recommendations to manage. Just a clean list of bands and the ones you decided to save.</p>
+                <a class="button button--light" href="{{ route('bands.list') }}">Browse bands</a>
             </div>
-
-        </section>
-
-
-        <section
-            class="d-flex flex-column flex-lg-row justify-content-lg-between align-items-lg-stretch align-items-center justify-content-center mb-5">
-
-            <div class="d-flex flex-row-reverse align-items-start justify-content-between flex-wrap gap-3 px-3">
-                <img src="{{ asset('images/landing_page/vibraze_poster.png') }}" alt="Vibraze Poster" width="350"
-                    class="img-fluid">
-
-                <div class="text-start" style="max-width: 600px;">
-                    <h2 class="fw-bold">Easy to use</h2>
-                    <p class="lead mb-4 text-center text-lg-start">Vibraze is a simple and easy to use web application. You
-                        can search for bands, add
-                        them
-                        to your favorites list and check your favorite genre in a few clicks!</p>
-
-                    <h2 class="fw-bold">Find other people</h2>
-                    <p class="lead mb-4 text-center text-lg-start">You can find other people who share your passion for
-                        music and bands!</p>
-
-                    <h2 class="fw-bold">Customize your experience</h2>
-                    <p class="lead mb-4 text-center text-lg-start">You can customize your experience by changing the theme,
-                        language and more!</p>
-                </div>
-            </div>
-
-        </section>
-
+        </div>
     </section>
 @endsection

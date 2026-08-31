@@ -1,56 +1,26 @@
 @extends('layouts.app')
 
+@section('title', 'Create an account — Vibraze')
+
 @section('content')
-<section class="mb-5 px-3 px-lg-0 py-5">
-    <div class="bands-container d-flex justify-content-center justify-content-lg-start">
-        <div class="row w-100">
-            <div class="col-lg-6 col-md-8 col-12 mx-auto">
-
-                <div class="card shadow-lg border-0 rounded-lg">
-                    <div class="card-header text-center py-4 bg-success text-white">
-                        <h2 class="fw-bold">Create Your Account</h2>
-                    </div>
-                    <div class="card-body p-4">
-                        <form method="POST" action="{{ route('users.store') }}">
-                            @csrf
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Full Name</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required autofocus>
-                                @error('name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email Address</label>
-                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required>
-                                @error('email')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required>
-                                @error('password')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="password_confirmation" class="form-label">Confirm Password</label>
-                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
-                            </div>
-
-                            <div class="d-flex justify-content-between flex-column flex-lg-row gap-3">
-                                <button type="submit" class="btn btn-success w-48">Register</button>
-                                <a href="{{ route('login') }}" class="btn btn-outline-success w-48 text-decoration-none text-center">Already have an account?</a>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+    <section class="auth-layout page-shell">
+        <div class="auth-intro">
+            <span class="eyebrow">Make it personal</span>
+            <h1>Save the bands you like.</h1>
+            <p>Create an account to keep favorites and see which genre you save most often.</p>
+            <ol class="auth-steps"><li><span>01</span>Browse the catalog</li><li><span>02</span>Save a band</li><li><span>03</span>Check your profile</li></ol>
         </div>
-    </div>
-</section>
+        <div class="auth-card">
+            <div class="auth-card__heading"><h2>Create your account</h2><p>It only takes a minute to get started.</p></div>
+            <form method="POST" action="{{ route('users.store') }}">
+                @csrf
+                <div class="field"><label for="name">Full name</label><input id="name" name="name" type="text" value="{{ old('name') }}" autocomplete="name" required autofocus>@error('name')<span class="field-error">{{ $message }}</span>@enderror</div>
+                <div class="field"><label for="email">Email address</label><input id="email" name="email" type="email" value="{{ old('email') }}" autocomplete="email" required>@error('email')<span class="field-error">{{ $message }}</span>@enderror</div>
+                <div class="field"><label for="password">Password</label><input id="password" name="password" type="password" autocomplete="new-password" required><span class="field-hint">Use at least 8 characters.</span>@error('password')<span class="field-error">{{ $message }}</span>@enderror</div>
+                <div class="field"><label for="password_confirmation">Confirm password</label><input id="password_confirmation" name="password_confirmation" type="password" autocomplete="new-password" required></div>
+                <button class="button button--primary button--block" type="submit">Create account</button>
+            </form>
+            <p class="auth-card__footer">Already have an account? <a href="{{ route('login') }}">Log in</a></p>
+        </div>
+    </section>
 @endsection

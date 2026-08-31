@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Genre;
-use App\Models\User;
 use App\Models\Bands;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
 class BandsController extends Controller
 {
@@ -36,11 +33,9 @@ class BandsController extends Controller
             $user = Auth::user();
             $genres = Genre::all();
 
-            $imagePath = $band->image ? Storage::url($band->image) : null;
-
             $genreName = $band->genre->name;
 
-            return view('bands.show_band', compact('band', 'genreName', 'user', 'genres', 'imagePath'));
+            return view('bands.show_band', compact('band', 'genreName', 'user', 'genres'));
         }
 
 
@@ -65,15 +60,8 @@ class BandsController extends Controller
                 'percussionist' => 'nullable|string|max:255',
                 'keyboardist' => 'nullable|string|max:255',
                 'dj' => 'nullable|string|max:255',
-                'best_selled_album' => 'nullable|string|max:255',
-                'image' => 'required|image'
+                'best_selled_album' => 'nullable|string|max:255'
             ]);
-
-            $image = null;
-
-            if ($request->hasFile('image')) {
-                $image = Storage::putFile('bandPhotos', $request->file('image'));
-            }
 
             Bands::insert([
                 'name' => $request->name,
@@ -89,8 +77,7 @@ class BandsController extends Controller
                 'percussionist' => $request->percussionist ?? null,
                 'keyboardist' => $request->keyboardist ?? null,
                 'dj' => $request->dj ?? null,
-                'best_selled_album' => $request->best_selled_album ?? null,
-                'image' => $image
+                'best_selled_album' => $request->best_selled_album ?? null
             ]);
 
             return redirect()->back()->with('success', 'Band added successfully!');
@@ -111,15 +98,8 @@ class BandsController extends Controller
                 'percussionist' => 'nullable|string|max:255',
                 'keyboardist' => 'nullable|string|max:255',
                 'dj' => 'nullable|string|max:255',
-                'best_selled_album' => 'nullable|string|max:255',
-                'image' => 'required|image'
+                'best_selled_album' => 'nullable|string|max:255'
             ]);
-
-            $image = null;
-
-            if ($request->hasFile('image')) {
-                $image = Storage::putFile('bandPhotos', $request->file('image'));
-            }
 
             Bands::where('id', $bandId)->update([
                 'name' => $request->name,
@@ -135,8 +115,7 @@ class BandsController extends Controller
                 'percussionist' => $request->percussionist ?? null,
                 'keyboardist' => $request->keyboardist ?? null,
                 'dj' => $request->dj ?? null,
-                'best_selled_album' => $request->best_selled_album ?? null,
-                'image' => $image
+                'best_selled_album' => $request->best_selled_album ?? null
             ]);
 
             return redirect()->back()->with('success', "Band updated successfully!");
