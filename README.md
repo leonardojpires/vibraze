@@ -2,7 +2,7 @@
 
 Vibraze is a Laravel web application for discovering rock and metal bands. Users can search and filter bands by genre, manage a favorites list, and maintain their profile.
 
-The project was developed for the Web Server Programming course and is currently under active development.
+The project was developed for the Higher Technical Professional Course within the scope of Web Server Programming module.
 
 ## Features
 
